@@ -6,9 +6,9 @@ top_folder = "meme_videos"
 bottom_folder = "client_videos"
 output_folder = "merged_videos"
 
-# Get a list of the video files in each folder
-top_files = os.listdir(top_folder)
-bottom_files = os.listdir(bottom_folder)
+# Get a list of the video files in each folder, excluding .DS_Store files
+top_files = [f for f in os.listdir(top_folder) if not f.startswith('.') and os.path.isfile(os.path.join(top_folder, f))]
+bottom_files = [f for f in os.listdir(bottom_folder) if not f.startswith('.') and os.path.isfile(os.path.join(bottom_folder, f))]
 
 def process_video(bottom_file, top_file):
     bottom_path = os.path.join(bottom_folder, bottom_file)
