@@ -1,6 +1,6 @@
 import os
 from moviepy.editor import VideoFileClip, CompositeVideoClip, concatenate_videoclips
-from multiprocessing import Pool
+from concurrent.futures import ThreadPoolExecutor
 
 # Define the paths to the video folders
 top_folder = "meme_videos"
@@ -30,8 +30,6 @@ def process_video(bottom_file, top_file):
         num_loops = int(max_duration / clip2.duration) + 1
         clip2 = concatenate_videoclips([clip2] * num_loops)
         clip2 = clip2.subclip(0, max_duration) 
-
-    print(clip1.duration, clip2.duration)
     
     bottom_height = int(clip1.h / 2)
     top_height = int(bottom_height * 1.2)
@@ -58,6 +56,6 @@ if __name__ == '__main__':
     for i, bottom_file in enumerate(bottom_files):
         for j, top_file in enumerate(top_files):
             arguments.append((bottom_file, top_file))
-    # use multiprocessing to process videos in parallel
-    with Pool(processes=2) as pool:
-        pool.starmap(process_video, arguments)
+    # use a ThreadPool to process videos in parallel
+    with ThreadPoolExecutor(max_workers=2) as executor:
+        executor.starmap(process_video, arguments)
