@@ -1,0 +1,8 @@
+No need to pip anymore
+Just double click or run with terminal "python3 videomaker.py"
+
+Make 2 folders:
+client_videos
+meme_videos
+
+Output folder is automatically generated.
