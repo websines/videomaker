@@ -59,3 +59,5 @@ if __name__ == '__main__':
     # use multiprocessing to process videos in parallel
     with Pool(processes=2) as pool:
         pool.starmap(process_video, arguments)
+    pool.close()
+    pool.join()
