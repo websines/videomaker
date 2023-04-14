@@ -44,7 +44,7 @@ def process_video(bottom_file, top_file):
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
     output_filename = os.path.join(output_folder, f"merged_video_{bottom_file.split('.')[0]}_{top_file.split('.')[0]}.mp4")
-    final_clip.write_videofile(output_filename)
+    final_clip.write_videofile(output_filename, fps=30)
 
     # Free up memory by deleting the clips
     del clip1, clip2, final_clip
