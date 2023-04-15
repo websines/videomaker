@@ -39,6 +39,9 @@ def process_video(bottom_file, top_file):
     # Stack the clips vertically and play them at the same time
     final_clip = CompositeVideoClip([clip1, clip2.set_position((0, top_height))],
                                     size=(clip1.w, top_height + bottom_height))
+    
+    # Set the audio of the final clip to the audio of the top clip
+    final_clip.audio = clip1.audio
 
     # Write the merged video file to the output folder
     if not os.path.exists(output_folder):
